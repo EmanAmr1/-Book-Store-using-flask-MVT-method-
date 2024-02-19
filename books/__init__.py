@@ -1,5 +1,6 @@
 from flask import Blueprint
-books= Blueprint('')
+
+#books= Blueprint('')
 
 book_blueprint= Blueprint("books",__name__,url_prefix="/books")
 

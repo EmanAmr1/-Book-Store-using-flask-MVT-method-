@@ -14,5 +14,7 @@ def create_app(config_name="prd"):
     app.config.from_object(current_config)
     db.init_app(app)
     migrate = Migrate(app, db ,render_as_batch=True)
-    
+
+    from app.books import book_blueprint
+    app.register_blueprint(book_blueprint)
     return app

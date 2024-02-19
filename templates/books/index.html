@@ -9,7 +9,7 @@
         {% for book in books %}
         <div class="col">
             <div class="card shadow-lg"> <!-- Added 'shadow-lg' class for larger shadow -->
-                <img src="{{ url_for('static', filename='books/images/' + book.image) }}" class="card-img-top"
+                <img src="{{ book.image_url }}" class="card-img-top"
                     alt="{{ book.title }}" style="max-height: 200px;">
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 16px;">{{ book.title }}</h5>
@@ -18,12 +18,12 @@
                         card's content.</p>
                 </div>
                 <div class="card-footer">
-                    <a  class="btn btn-primary btn-sm">Show</a>
-                    <form action="" method="post" class="d-inline">
+                    <a  href="{{book.show_url}}"  class="btn btn-primary btn-sm">Show</a>
+                    <form action="{{ url_for('books.delete_book', id=book.id) }}" method="post" class="d-inline">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button   type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
-                    <a href="" class="btn btn-success btn-sm">Update</a>
+                   <a href="{{ url_for('books.book_update', id=book.id) }}" class="btn btn-success btn-sm">Update</a>
                 </div>
             </div>
         </div>

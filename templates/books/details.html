@@ -8,16 +8,16 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-5">
-                            <img src="{{ url_for('static', filename='books/images/' + bk.image) }}"
-                                class="img-fluid rounded" alt="{{ bk.title }}">
+                            <img src="{{ book.image_url }}"
+                                class="img-fluid rounded" alt="{{ book.title }}">
                         </div>
                         <div class="col-md-7">
-                            <h1 class="card-title">{{ bk.title }} BOOK</h1>
+                            <h1 class="card-title">{{ book.title }} BOOK</h1>
                             <div class="card-text">
-                                <p><strong>Price:</strong> ${{ bk.price }}</p>
-                                <p><strong>No. of Pages:</strong> {{ bk.no_of_pages }}</p>
-                                <p><strong>Created_at:</strong> {{ bk.created_at }}</p>
-                                <p><strong>Updated_at:</strong> {{ bk.updated_at }}</p>
+                                <p><strong>Price:</strong> ${{ book.price }}</p>
+                                <p><strong>No. of Pages:</strong> {{ book.no_of_pages }}</p>
+                                <p><strong>Created_at:</strong> {{ book.created_at }}</p>
+                                <p><strong>Updated_at:</strong> {{ book.updated_at }}</p>
                             </div>
                             <hr>
                             <div class="text-center">

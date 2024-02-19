@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Update Book</h1>
 
-<form action="{{ url_for('book.update', book_id=book.id) }}" method="post">
+<form action="{{ url_for('books.book_update', id=book.id) }}" method="post">
     <div class="mb-3">
         <label class="form-label">Title</label>
         <input type="text" name="title" class="form-control" value="{{ book.title }}">

@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-
+{% import 'macros_.html' as mymacro %}
 {% block content %}
 <div class="container">
     <div class="row justify-content-center mt-5">
@@ -20,12 +20,10 @@
                                 <p><strong>Updated_at:</strong> {{ book.updated_at }}</p>
                             </div>
 
-                           <p> Books in this Category : </p>
-<div>
-    {% for bk in book.category_name.books %}
-        <div> {{ bk.title }}</div>
-    {% endfor %}
-</div>
+                           <h4 style="color:blue;"> Books in this Category : </h4>
+
+          {{mymacro.listobjects(book.category_name.books)}}
+
                             <hr>
                             <div class="text-center">
                                 <a href="#" class="btn btn-primary btn-lg">Buy Now</a>

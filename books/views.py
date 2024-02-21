@@ -1,6 +1,8 @@
 from flask import render_template ,request,redirect,url_for, make_response
 from app.models import Books ,db
 from app.books import book_blueprint
+from app.books.forms import BookForm
+
 
 @book_blueprint.route('',endpoint='books_index')
 def books_index():
@@ -48,6 +50,10 @@ def update_book(id):
     return render_template("books/update.html", book=book)
 
 
+@book_blueprint.route("/createform" , methods=['GET' , 'POST'], endpoint='createform')
+def create_book_viaform():
+    form=BookForm()
+    return render_template("books/createform.html" , form=form)
 
 
 @book_blueprint.errorhandler(404)

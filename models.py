@@ -10,6 +10,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String, unique=True)
+    categories = db.relationship('Books' , backref="categories", lazy= True)
 
     def __str__(self):
         return f"{self.name}"
@@ -31,6 +32,7 @@ class Books(db.Model):
     no_of_pages = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=func.now())
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=True)
 
 
     def __str__(self):

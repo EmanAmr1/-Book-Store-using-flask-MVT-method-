@@ -19,6 +19,13 @@
                                 <p><strong>Created_at:</strong> {{ book.created_at }}</p>
                                 <p><strong>Updated_at:</strong> {{ book.updated_at }}</p>
                             </div>
+
+                           <p> Books in this Category : </p>
+<div>
+    {% for bk in book.category_name.books %}
+        <div> {{ bk.title }}</div>
+    {% endfor %}
+</div>
                             <hr>
                             <div class="text-center">
                                 <a href="#" class="btn btn-primary btn-lg">Buy Now</a>

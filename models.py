@@ -10,7 +10,7 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String, unique=True)
-    categories = db.relationship('Books' , backref="categories", lazy= True)
+    books = db.relationship('Books' , backref="category_name", lazy= True)
 
     def __str__(self):
         return f"{self.name}"

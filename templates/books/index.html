@@ -13,9 +13,12 @@
                     alt="{{ book.title }}" style="max-height: 200px;">
                 <div class="card-body">
                     <h5 class="card-title" style="font-size: 16px;">{{ book.title }}</h5>
-                    <p class="card-text" style="font-size: 14px;">Some quick example text to build on the card title and
-                        make up the bulk of the
-                        card's content.</p>
+                    <p class="card-text">
+    <span class="text-brown fw-bold"  >Book Category:</span>
+    <span style="color:red " >{{ book.category_name }}</span>
+</p>
+
+
                 </div>
                 <div class="card-footer">
                     <a  href="{{book.show_url}}"  class="btn btn-primary btn-sm">Show</a>

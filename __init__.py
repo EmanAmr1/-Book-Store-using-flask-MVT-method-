@@ -17,4 +17,8 @@ def create_app(config_name="prd"):
 
     from app.books import book_blueprint
     app.register_blueprint(book_blueprint)
+
+    from app.categories import  category_blueprint
+    app.register_blueprint(category_blueprint)
+
     return app

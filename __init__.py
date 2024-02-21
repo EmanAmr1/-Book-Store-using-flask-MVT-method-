@@ -23,7 +23,8 @@ def create_app(config_name="prd"):
 
 
     api= Api(app)
-    from app.books.api_views import BookList
+    from app.books.api_views import BookList , bookResource
     api.add_resource(BookList, '/api/books')
+    api.add_resource(bookResource , '/api/books/<int:bk_id>')
 
     return app

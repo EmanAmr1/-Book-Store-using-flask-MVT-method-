@@ -24,6 +24,21 @@ class Category(db.Model):
     def get_category_by_id(cls, id):
         return cls.query.get_or_404(id)
 
+    @classmethod
+    def save_category(cls, request_data):
+        # Convert ImmutableMultiDict to dict if necessary
+        if isinstance(request_data, ImmutableMultiDict):
+            request_data = request_data.to_dict()
+
+        # Remove csrf_token from request_data if present
+        if 'csrf_token' in request_data:
+            del request_data['csrf_token']
+
+        category = cls(**request_data)
+        db.session.add(category)
+        db.session.commit()
+        return category
+
 class Books(db.Model):
     __tablename__ = "books"
     id = db.Column(db.Integer, primary_key=True)
@@ -74,6 +89,9 @@ class Books(db.Model):
         db.session.commit()
         return book
 
+
+
+
     @staticmethod
     def update_book(book, form_data):
         try:
@@ -88,3 +106,12 @@ class Books(db.Model):
             db.session.rollback()  # Rollback changes in case of error
             return False
 
+
+    @classmethod
+    def delete_book(cls, id):
+         # Get the book object from the database
+         book = Books.get_book_by_id(id)
+          # Delete the book from the database
+         db.session.delete(book)
+         db.session.commit()
+         return True

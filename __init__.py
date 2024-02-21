@@ -4,7 +4,7 @@ from flask import Flask
 from app.config import config_options as AppConfig
 from app.models import db
 from flask_migrate import Migrate
-
+from flask_restful import  Api
 
 def create_app(config_name="prd"):
     app = Flask(__name__)
@@ -20,5 +20,10 @@ def create_app(config_name="prd"):
 
     from app.categories import  category_blueprint
     app.register_blueprint(category_blueprint)
+
+
+    api= Api(app)
+    from app.books.api_views import BookList
+    api.add_resource(BookList, '/api/books')
 
     return app

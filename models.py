@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from sqlalchemy import func
 from flask import  url_for
+from werkzeug.datastructures import ImmutableMultiDict
 
 db = SQLAlchemy()
 
@@ -58,9 +59,16 @@ class Books(db.Model):
     def show_url(self):
         return url_for("books.books_show",id=self.id)
 
-
     @classmethod
-    def save_book(cls ,request_data):
+    def save_book(cls, request_data):
+        # Convert ImmutableMultiDict to dict if necessary
+        if isinstance(request_data, ImmutableMultiDict):
+            request_data = request_data.to_dict()
+
+        # Remove csrf_token from request_data if present
+        if 'csrf_token' in request_data:
+            del request_data['csrf_token']
+
         book = cls(**request_data)
         db.session.add(book)
         db.session.commit()

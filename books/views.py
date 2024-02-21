@@ -50,10 +50,24 @@ def update_book(id):
     return render_template("books/update.html", book=book)
 
 
-@book_blueprint.route("/createform" , methods=['GET' , 'POST'], endpoint='createform')
+@book_blueprint.route("/createform", methods=['GET', 'POST'], endpoint='createform')
 def create_book_viaform():
-    form=BookForm()
-    return render_template("books/createform.html" , form=form)
+    form = BookForm(request.form)
+    if request.method == 'POST' and form.validate():
+        book_data = request.form.to_dict()  # Convert ImmutableMultiDict to dict
+        if 'csrf_token' in book_data:
+            del book_data['csrf_token']  # Exclude csrf_token from the data
+        book = Books.save_book(book_data)
+        return redirect(book.show_url)
+
+    return render_template("books/createform.html", form=form)
+
+
+
+
+
+
+
 
 
 @book_blueprint.errorhandler(404)
